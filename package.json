@@ -1,0 +1,16 @@
+{
+  "name": "hy-template-gen",
+  "version": "1.0.15",
+  "description": "生成通用element-ui模板代码",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "genorator",
+    "element-ui",
+    "template"
+  ],
+  "author": "hongyu",
+  "license": "ISC"
+}

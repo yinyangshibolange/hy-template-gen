@@ -1,0 +1,5 @@
+<el-form-item prop="#${prop}" label="#${label}">
+  <el-radio-group v-model="dataForm.#${prop}">
+    <el-radio v-for="(item, index) in $getDictDataList('#${dict}')" :key="index" :label="item.dictValue">{{item.dictLabel}}</el-radio>
+  </el-radio-group>
+</el-form-item>
