@@ -29,9 +29,8 @@ function aReadFile(path) {
  * @param {String} templateName 模板名称
  * @returns
  */
-async function getTemplateStr(templateName, path) {
-    const filePath = path.join(path || __dirname, `templates/${templateName}`)
-    console.log('getTemplateStr, filePath', filePath)
+async function getTemplateStr(templateName, _path) {
+    const filePath = path.join(_path || __dirname, `templates/${templateName}`)
     return await aReadFile(filePath)
 }
 
@@ -46,7 +45,7 @@ const matchReg = /#\$\{(((?!#\$\{).)*)\}/
 function replaceMatch(oldStr, params) {
     let tempStr = oldStr
     const matchResult = tempStr.match(matchRegg)
-    matchResult.forEach(item => {
+    matchResult && matchResult.forEach(item => {
         const key = item.match(matchReg)[1]
         const replaceReg = new RegExp(`#\\$\\{${key}\\}`, 'g')
         tempStr = tempStr.replace(replaceReg, params[key] || '')
@@ -59,17 +58,20 @@ function replaceMatch(oldStr, params) {
 /**
  * 生成模板列表
  * @param {*} list
+ * @param {*} list中模板存在位置
  * @returns
  */
-async function replaceList(list) {
+async function replaceList(list, _path) {
     let filterStr
     const filterStrList = []
     for (let i = 0; i < list.length; i++) {
         let item0 = list[i]
         try {
-            filterStr = await getTemplateStr(item0.template + '.html') // 子模板
+            filterStr = await getTemplateStr(item0.template + '.html',item0.templatePath || _path) // 子模板
+            
             filterStrList.push(replaceMatch(filterStr, item0))
         } catch (err) {
+            console.log(err)
             filterStr = ''
         }
     }

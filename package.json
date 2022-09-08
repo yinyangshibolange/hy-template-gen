@@ -1,6 +1,6 @@
 {
   "name": "hy-template-gen",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "description": "生成通用element-ui模板代码",
   "main": "index.js",
   "scripts": {
@@ -12,5 +12,8 @@
     "template"
   ],
   "author": "hongyu",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
+  }
 }
