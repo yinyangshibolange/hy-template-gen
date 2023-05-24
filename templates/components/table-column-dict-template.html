@@ -1,0 +1,5 @@
+<el-table-column type="#${type}" prop="#${prop}" label="#${label}" header-align="center" align="center">
+ <template slot-scope="scope">
+  {{ $getDictLabel(scope.row.#${prop}, '#${dict}') }}
+ </template>
+</el-table-column>

@@ -33,56 +33,79 @@
 
 #### 项目根目录新建文件gen.js
 ```
-const servicePath = '/customer/customer'
+const servicePath = '/page/page'
 
 // 参数
 const params = {
-    filterList: [{
-        prop: 'name',
-        template: 'input-template',
-        label: '姓名'
-    }, {
-        prop: 'name',
-        template: 'select-template',
-        label: '类型',
-        dict: 'type',
-    }],
-    permissionPath: 'customers:custome-list',
-    tableColumns: [{
-        prop: 'name',
-        label: '姓名',
-        template: 'table-column',
-    }, {
-        prop: 'type',
-        label: '类型',
-        template: 'table-column',
-    },],
-    dataForm: ``,
-    servicePath,
+  filterList: [{
+    prop: 'catId',
+    template: 'select-template',
+    label: '品牌类型',
+    dict: 'catId',
+  }, {
+    prop: 'name',
+    template: 'input-template',
+    label: '名称',
+  }],
+  permissionPath: 'cake-uncle:brand',
+  tableColumns: [{
+    prop: 'id',
+    label: '品牌类型',
+    template: 'table-column',
+  },{
+    prop: 'imagePath',
+    label: '图片',
+    template: 'table-column',
+  },{
+    prop: 'name',
+    label: '名称',
+    template: 'table-column',
+  },{
+    prop: 'catId',
+    label: '品牌类型',
+    template: 'table-column',
+  },{
+    prop: 'albumImagePath',
+    label: '图片列表',
+    template: 'table-column',
+  }, {
+    prop: 'description',
+    label: '描述',
+    template: 'table-column',
+  },{
+    prop: 'dgssId',
+    label: '品牌类型',
+    template: 'table-column',
+  },{
+    prop: 'shortDescription',
+    label: '短描述',
+    template: 'table-column',
+  },],
+  dataForm: ``,
+  servicePath,
 }
 
 const addUpdateParams = {
-    formList: [{
-        prop: 'name',
-        template: 'input-template',
-        label: '姓名',
-        required: true,
-    }, {
-        prop: 'name',
-        template: 'select-template',
-        label: '类型',
-        dict: 'type',
-    }],
-    dataForm: '',
-    dataRule: '',
-    servicePath,
+  formList: [{
+    prop: 'name',
+    template: 'input-template',
+    label: '姓名',
+    required: true,
+  }, {
+    prop: 'name',
+    template: 'select-template',
+    label: '类型',
+    dict: 'type',
+  }],
+  dataForm: '',
+  dataRule: '',
+  servicePath,
 }
 
-const path = './test'
-const name = 'test-list'
+const path = './src/views/modules/cake-uncle'
+const name = 'brand'
 
-const { genorTable, genorAddUpdate } =require("./index")
-const {params, addUpdateParams,}  = require("./genorator-config")
+const { genorTable, genorAddUpdate } = require("hy-template-gen")
 
 genorTable(path, name, params)
 genorAddUpdate(path, name, addUpdateParams)
@@ -134,18 +157,18 @@ geror()
 #### 在目录中创建模板文件，例如
 a.html
 ```
-我是a,我是a的参数#{aa},我是a的参数#{bb},我是a的参数#{cc}
+我是a,我是a的参数#${aa},我是a的参数#${bb},我是a的参数#${cc}
 ```
 b.html
 ```
-我是b,我是b的参数#{aa},我是b的参数#{bb},我是b的参数#{cc}
+我是b,我是b的参数#${aa},我是b的参数#${bb},我是b的参数#${cc}
 ```
 all.vue
 ```
 <template>
     <div>
         <h1>{{app.name}}</h1>
-        <p>#{content}</p>
+        <p>#${content}</p>
     </div>
 </template>
 
@@ -153,7 +176,7 @@ all.vue
 export default {
  data() {
     return {
-        app: #{app}
+        app: #${app}
     }
  }
 }

@@ -1,4 +1,4 @@
-const { replaceMatch, replaceList, getTemplateStr, writeVueFile } = require('./genorator.js')
+const { replaceMatch, replaceList, getTemplateStr, writeVueFile } = require('./lib/genorator.js')
 
 
 /**
@@ -8,14 +8,14 @@ const { replaceMatch, replaceList, getTemplateStr, writeVueFile } = require('./g
  * @param {*} params 参数
  * @returns
  */
-async function genorTable(path, name, params) {
+async function genorTable(path, name, params, dir) {
     // 生成筛选dom
-    const filterListResult = await replaceList(params.filterList)
+    const filterListResult = await replaceList(params.filterList, dir)
     const filterList = params.filterList
     params.filterList = filterListResult
 
     // 生成el-table-column dom
-    const tableColumns = await replaceList(params.tableColumns)
+    const tableColumns = await replaceList(params.tableColumns, dir)
     params.tableColumns = tableColumns
 
 
@@ -27,7 +27,7 @@ async function genorTable(path, name, params) {
     params.dataForm = JSON.stringify(dataForm)
     params.filename = name
     // 生成params.vue页面
-    const paramsTemplateStr = await getTemplateStr("params.vue")
+    const paramsTemplateStr = await getTemplateStr("params.vue", dir)
     const result = replaceMatch(paramsTemplateStr, params)
 
     await writeVueFile(path, name, result)
@@ -41,9 +41,9 @@ async function genorTable(path, name, params) {
  * @param {*} addUpdateParams 参数
  * @returns
  */
-async function genorAddUpdate(path, name, addUpdateParams) {
+async function genorAddUpdate(path, name, addUpdateParams, dir) {
     // 生成表单dom
-    const filterListResult = await replaceList(addUpdateParams.formList)
+    const filterListResult = await replaceList(addUpdateParams.formList, dir)
     const filterList = addUpdateParams.formList
     addUpdateParams.formList = filterListResult
 
@@ -61,7 +61,7 @@ async function genorAddUpdate(path, name, addUpdateParams) {
     addUpdateParams.dataForm = JSON.stringify(dataForm)
     addUpdateParams.dataRule = JSON.stringify(dataRule)
 
-    const paramsTemplateStr = await getTemplateStr("params-add-or-update.vue")
+    const paramsTemplateStr = await getTemplateStr("params-add-or-update.vue", dir)
     const result = replaceMatch(paramsTemplateStr, addUpdateParams)
     await writeVueFile(path, `${name}-add-or-update`, result)
     return result

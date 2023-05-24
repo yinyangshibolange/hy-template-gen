@@ -1,17 +1,8 @@
 <template>
-  <el-dialog
-    :visible.sync="visible"
-    :title="!dataForm.id ? $t('add') : $t('update')"
-    :close-on-click-modal="false"
-    :close-on-press-escape="false"
-  >
-    <el-form
-      :model="dataForm"
-      :rules="dataRule"
-      ref="dataForm"
-      @keyup.enter.native="dataFormSubmitHandle()"
-      label-width="120px"
-    >
+  <el-dialog :visible.sync="visible" :title="!dataForm.id ? $t('add') : $t('update')"
+    :close-on-click-modal="false" :close-on-press-escape="false">
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm"
+      @keyup.enter.native="dataFormSubmitHandle()" label-width="120px">
 
       #${formList}
     </el-form>
@@ -43,13 +34,13 @@ export default {
     initForm() {
       this.dataForm = #${dataForm}
     },
-    init() {
+    init(row) {
       this.visible = true;
       this.$nextTick(() => {
         this.initForm()
         this.$refs["dataForm"].resetFields();
-        if (this.dataForm.id) {
-          this.getInfo();
+        if (row) {
+          this.dataForm = row
         }
       });
     },

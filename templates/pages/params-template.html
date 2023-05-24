@@ -90,6 +90,7 @@
 <script>
 import mixinViewModule from "@/mixins/view-module";
 import AddOrUpdate from "./#${filename}-add-or-update";
+import { addDynamicRoute } from '@/router'
 export default {
   mixins: [mixinViewModule],
   data() {
@@ -106,5 +107,27 @@ export default {
   components: {
     AddOrUpdate,
   },
+  methods: {
+    // 新增 / 修改
+    addOrUpdateHandle (row) {
+      this.addOrUpdateVisible = true
+      this.$nextTick(() => {
+        this.$refs.addOrUpdate.init(row ? JSON.parse(JSON.stringify(row)) : {})
+      })
+    },
+    productManager (row) {
+      const routeParams = {
+        routeName: `${this.$route.name}__${row.id}`,
+        title: '管理-' + row.title,
+        path: 'spike/spike-products',
+        params: {
+          id: row.id
+        }
+      }
+      // 动态路由
+      addDynamicRoute(routeParams, this.$router)
+    }
+
+  }
 };
 </script>
