@@ -92,7 +92,7 @@
 1. 例子1（递归填充内容）
 ```javascript
 
-const { replaceMatch, getTemplate, writeFile, getTemplates, replaceState } = require("../lib/genorator")
+const { replaceMatch, getTemplate, writeFile, getTemplates, replaceState } = require("hy-template-gen")
 
 let options = {
  path: './test',
