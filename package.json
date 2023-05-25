@@ -1,6 +1,6 @@
 {
   "name": "hy-template-gen",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "生成通用element-ui模板代码",
   "main": "lib/genorator.js",
   "scripts": {
